@@ -1,6 +1,7 @@
 Werkzeug==2.2.2
 Flask-Login==0.6.3
 Flask==2.0.1
+python==3.10
 
 absl-py==1.4.0
 aiofiles==23.1.0
