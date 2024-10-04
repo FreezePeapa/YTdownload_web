@@ -49,7 +49,6 @@ def download_video():
 
             # 使用 yt-dlp 下載影片或音訊
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                print("testttttttttt")
                 ydl.download([url])
 
             # 回傳下載完成的文件，供用戶下載
