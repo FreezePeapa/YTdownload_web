@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, send_file, render_template
 import yt_dlp
 import os
+from werkzeug.urls import url_quote
 
 app = Flask(__name__)
 
