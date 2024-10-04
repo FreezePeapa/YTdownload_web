@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, send_file, render_template
 import yt_dlp
 import os
-from urllib.parse import quote as url_quote
+from urllib.parse import quote
 
 app = Flask(__name__)
 
