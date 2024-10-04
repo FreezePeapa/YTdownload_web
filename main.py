@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # 設定下載的檔案儲存路徑
-DOWNLOAD_PATH = './downloads/'
+DOWNLOAD_PATH = './'
 
 # 如果沒有該資料夾則創建它
 if not os.path.exists(DOWNLOAD_PATH):
