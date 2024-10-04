@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader</title>
+</head>
+<body>
+    <h1>Video Downloader</h1>
+
+    <label for="url">Video URL:</label>
+    <input type="text" id="url" placeholder="Enter YouTube video URL"><br><br>
+
+    <label for="type">Download Type:</label>
+    <select id="type">
+        <option value="mp3">MP3</option>
+        <option value="mp4">MP4</option>
+    </select><br><br>
+
+    <button onclick="downloadVideo()">Download</button>
+
+    <p id="message"></p>
+
+    <script>
+        function downloadVideo() {
+            const url = document.getElementById('url').value;
+            const type = document.getElementById('type').value;
+
+            if (!url) {
+                document.getElementById('message').innerText = "Please enter a video URL!";
+                return;
+            }
+
+            document.getElementById('message').innerText = "Downloading...";
+
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: url, type: type }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
+                }
+                return response.blob();  // 接收下載文件作為 blob
+            })
+            .then(blob => {
+                const downloadUrl = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = url.split('v=')[1] + '.' + type;  // 生成文件名
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                document.getElementById('message').innerText = "Download started!";
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('message').innerText = "Failed to download the video.";
+            });
+        }
+    </script>
+</body>
+</html>
